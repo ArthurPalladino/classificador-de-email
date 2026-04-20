@@ -17,6 +17,13 @@ VALID_LABELS = (
     "OUTROS",
 )
 
+LABEL_ALIASES = {
+    "VAGAS": "VAGAS DE EMPREGO",
+    "VAGAS EMPREGO": "VAGAS DE EMPREGO",
+    "EMPREGO": "VAGAS DE EMPREGO",
+    "ANUNCIOS": "ANUNCIO",
+}
+
 CLASSIFICATION_PROMPT = """
 Você é um classificador estrito de e-mails.
 Classifique o e-mail em exatamente UMA das seguintes categorias:
@@ -60,6 +67,7 @@ def extract_headers(raw_data: Iterable[tuple]) -> tuple[str, str]:
 
 def normalize_label(result: str) -> str:
     clean = " ".join((result or "").replace("\n", " ").strip().upper().split())
+    clean = LABEL_ALIASES.get(clean, clean)
     if clean in VALID_LABELS:
         return clean
     return "OUTROS"
@@ -67,7 +75,8 @@ def normalize_label(result: str) -> str:
 
 def classify_email(model: genai.GenerativeModel, sender: str, subject: str) -> str:
     response = model.generate_content(
-        CLASSIFICATION_PROMPT.format(sender=sender, subject=subject)
+        CLASSIFICATION_PROMPT.format(sender=sender, subject=subject),
+        generation_config={"temperature": 0},
     )
 
     result_text = getattr(response, "text", "") or ""
