@@ -37,26 +37,19 @@ O classificador responde estritamente com uma destas labels:
 
 ## Configuracao
 
-1. Criar ambiente virtual e ativar.
-2. Instalar dependencias:
+1. Criar `.venv` e ativar.
+
+```bash
+python -m venv .venv
+```
+
+2. Instalar dependencias.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Criar arquivo de ambiente com base no exemplo:
-
-```bash
-cp .env.example .env
-```
-
-No Windows PowerShell, alternativa para copia:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-4. Preencher o arquivo .env:
+3. Preencher o arquivo .env com as variaveis abaixo:
 
 - EMAIL_ACCOUNT
 - EMAIL_APP_PASSWORD
@@ -88,11 +81,3 @@ As instrucoes estao em cronjob.txt com exemplos para:
 
 - Cron (Linux/macOS)
 - Task Scheduler no Windows (schtasks)
-
-## Sequencia de Commits Sugerida
-
-1. chore: initial project structure and gitignore
-2. chore: setup dependencies and environment variables example
-3. feat: implement IMAP connection and email fetching
-4. feat: integrate Gemini API for classification
-5. feat: implement relocation logic and cronjob instructions
