@@ -63,7 +63,7 @@ Copy-Item .env.example .env
 - IMAP_HOST (default: imap.gmail.com)
 - IMAP_PORT (default: 993)
 - GEMINI_API_KEY
-- GEMINI_MODEL (default: gemini-1.5-flash)
+- GEMINI_MODEL (default: gemini-2.0-flash)
 - DRY_RUN (true ou false)
 
 ## Execucao Manual
