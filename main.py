@@ -107,7 +107,11 @@ def move_email_to_mailbox(
         logging.warning("Falha ao copiar email %s para %s", message_id.decode(), mailbox)
         return
 
-    connection.store(message_id, "+FLAGS", "\\Deleted")
+    status, _ = connection.store(message_id, "+FLAGS", "\\Deleted")
+    if status != "OK":
+        logging.warning("Falha ao marcar email %s como Deleted", message_id.decode())
+        return
+
     logging.info("Email %s movido para %s", message_id.decode(), mailbox)
 
 

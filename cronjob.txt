@@ -1,0 +1,5 @@
+# Linux/macOS (cron) - executa todo dia as 08:00
+0 8 * * * /usr/bin/python3 /caminho/absoluto/classificador-de-email/main.py >> /caminho/absoluto/classificador-de-email/bot.log 2>&1
+
+# Windows (Task Scheduler via schtasks) - executa todo dia as 08:00
+schtasks /Create /SC DAILY /ST 08:00 /TN "ClassificadorEmail" /TR "C:\Python310\python.exe C:\caminho\classificador-de-email\main.py" /F
